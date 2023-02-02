@@ -1,3 +1,7 @@
-token.json
-uid.json
-list.json
+/token.json
+/.gitignore
+/cod/__pycache__
+/__pycache__
+/core/__pycache__
+/uid.json
+/list.json
