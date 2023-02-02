@@ -16,7 +16,7 @@ class Join(Cog_Extension):
         embeds=nextcord.Embed(title = "大東亞帝國", description = "大明王朝Ming dynasty", color = 0xe32626)
         embeds.add_field(name = "新手須知", value = f"{member.mention} 請詳閱 <#978707952640872548> 以了解伺服器規範！\n 同時可以透過 <#978708014695600188> 熟悉頻道功能，\n 如果想快速認識大家可以到 <#990553527547990046> 。", inline = False)
         embeds.add_field(name = "身分組領取", value = "並且可透過 <#978740632086523914> 開啟色色區或者是內鬼情報區哦！", inline = False)
-        embeds.add_field(name = "遊戲疑難", value = "另外有任何遊戲疑問可在 <#978925411494920243>  進行詢問，\n 打不過的秘境或者BOSS也可於 <#978924406745210900>  來發布委託！", inline = False)
+        embeds.add_field(name = "遊戲疑難", value = "另外有任何遊戲疑問可在 <#1070424932850352178> 進行詢問，\n 打不過的秘境或者BOSS也可於 <#978924406745210900>  來發布委託！", inline = False)
         embeds.set_image("https://upload.cc/i1/2022/11/10/rb6dCB.png")
 
         with open('list.json','r',encoding='utf8') as loli:
