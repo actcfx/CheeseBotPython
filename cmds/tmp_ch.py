@@ -15,6 +15,7 @@ class tmp_channel(Cog_Extension):
         global create_channel
         everyone_role = self.bot.get_guild(member.guild.id).get_role(978680658740260865)
         member_role = self.bot.get_guild(member.guild.id).get_role(978732220154007613)
+        
         create_channel = {
             member:nextcord.PermissionOverwrite(manage_channels = True),    #給予頻道創建者編輯該頻道的權限
             everyone_role:nextcord.PermissionOverwrite(view_channel = False),   #使everyone身分組無法瀏覽頻道

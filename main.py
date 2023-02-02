@@ -5,7 +5,7 @@ import nextcord
 from unicodedata import name
 from nextcord.ext import commands
 
-bot = commands.Bot(command_prefix='%', intents = nextcord.Intents.all())
+bot = commands.Bot(command_prefix = '%', intents = nextcord.Intents.all())
 with open('token.json', 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
 

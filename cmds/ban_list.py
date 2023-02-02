@@ -7,7 +7,7 @@ from core.classes import Cog_Extension
 
 class Ban_list(Cog_Extension):
     @commands.command()
-    @commands.has_any_role(978680963099942912,979385876209610752,978956326359138314)    #社長、工程師、管理員
+    @commands.has_any_role(978680963099942912,979385876209610752,978956326359138314, 1070679396165373984)    #社長、工程師、管理員
     async def ban_list(self, ctx):
         with open('list.json', 'r', encoding = 'utf-8') as ban_l:
             banlast = json.load(ban_l)
