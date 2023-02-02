@@ -10,7 +10,7 @@ class mes (Cog_Extension):
   @commands.Cog.listener()
   async def on_message(self,mes:nextcord.Message):
     if mes.channel.id == 992008416140734574 or mes.channel.id == 978924406745210900:
-      if mes.type != (nextcord.MessageType.chat_input_command)and mes.author.id not in  [972137604470407168,537846086749126657,992351373280690206]:
+      if mes.type != (nextcord.MessageType.chat_input_command)and mes.author.id not in  [972137604470407168,537846086749126657,992351373280690206, 407881227270356994]:
         try:
           await mes.delete()
           await mes.author.send(f'在<#{mes.channel.id}>請使用斜線指令喔(詳細說明請看頻道訂選訊息)')
