@@ -3,7 +3,6 @@ import nextcord
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 
-
 class Message(Cog_Extension):
     def __init__(self, bot):
             self.bot = bot
@@ -33,7 +32,6 @@ class Message(Cog_Extension):
             user_uid[str(message.author.id)]["id"] = message.id
             with open('uid.json', 'w', encoding='utf8') as uid:
                 json.dump(user_uid, uid, indent = 2, ensure_ascii = False)
-
 
 def setup(bot):
     bot.add_cog(Message(bot))
