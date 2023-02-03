@@ -28,6 +28,8 @@ class Leave(Cog_Extension):
             with open('list.json', 'w', encoding='utf-8') as ban_l:
                 json.dump(banlast, ban_l, indent = 4)
 
+        print(f'-> {member} leave the server!')
+
 
 def setup(bot):
     bot.add_cog(Leave(bot))
