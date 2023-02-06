@@ -23,21 +23,21 @@ async def ping(ctx):
 
 
 @bot.command()
-@commands.has_permissions(ban_members = True)
+@commands.is_owner()
 async def load(ctx, extension):
     bot.load_extension(f'cmds.{extension}')
     await ctx.send(f'導入{extension}成功')
     print(f'-> Loaded {extension} successful!')
 
 @bot.command()
-@commands.has_permissions(ban_members = True)
+@commands.is_owner()
 async def unload(ctx, extension):
     bot.unload_extension(f'cmds.{extension}')
     await ctx.send(f'導出{extension}成功')
     print(f'-> Unloaded {extension} successful!')
 
 @bot.command()
-@commands.has_permissions(ban_members = True)
+@commands.is_owner()
 async def reload(ctx, extension):
     bot.reload_extension(f'cmds.{extension}')
     await ctx.send(f'重置{extension}成功')

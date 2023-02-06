@@ -12,7 +12,7 @@ class Message(Cog_Extension):
         quest_channel_id = 978924406745210900
         information_channel_id = 990553527547990046
         chat_channel = self.bot.get_channel(978708780445495328)
-        bot_id = [972137604470407168,537846086749126657,992351373280690206, 1065293003532546090]
+        bot_id = [972137604470407168, 992351373280690206, 1065293003532546090, 1070748028123750420]
         arcticfox_id = 407881227270356994
 
         if message.channel.id == quest_channel_id:
@@ -32,6 +32,21 @@ class Message(Cog_Extension):
             user_uid[str(message.author.id)]["id"] = message.id
             with open('uid.json', 'w', encoding='utf8') as uid:
                 json.dump(user_uid, uid, indent = 2, ensure_ascii = False)
+
+        elif message.content == '北極狐':
+            await message.channel.send('https://upload.cc/i1/2023/02/04/PUsZfb.png')
+
+        elif (message.content in ['hi', 'Hi', 'hello', 'Hello','嗨']) and (message.author.id not in bot_id):
+            await message.reply(f'hi {message.author.name}')
+
+        elif ('歡迎' in message.content) and (len(message.content) <= 6) and (message.author.id not in bot_id):
+            await message.channel.send('歡迎～')
+
+        elif (message.content.startswith('6')) and (len(message.content) <= 10) and (message.author.id not in bot_id):
+            await message.channel.send(message.content)
+
+#        elif (message.author.id == arcticfox_id):
+#            await message.reply('你真的是他媽幹話王欸')
 
 def setup(bot):
     bot.add_cog(Message(bot))
