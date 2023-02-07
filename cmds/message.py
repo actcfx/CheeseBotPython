@@ -34,7 +34,10 @@ class Message(Cog_Extension):
                 json.dump(user_uid, uid, indent = 2, ensure_ascii = False)
 
         elif message.content == '北極狐':
-            await message.channel.send('https://upload.cc/i1/2023/02/04/PUsZfb.png')
+            await message.channel.send('https://upload.cc/i1/2023/02/08/QkjlHU.png')
+
+        elif message.content == '容克':
+            await message.channel.send('https://upload.cc/i1/2023/02/08/7PTJUV.png')
 
         elif (message.content in ['hi', 'Hi', 'hello', 'Hello','嗨']) and (message.author.id not in bot_id):
             await message.reply(f'hi {message.author.name}')
