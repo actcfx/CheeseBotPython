@@ -44,6 +44,11 @@ async def reload(ctx, extension):
     print(f'-> Reloaded {extension} successful!')
 
 
+@bot.event
+async def on_command_error(ctx, error):
+    await ctx.send(error)
+
+
 for Filename in os.listdir('cmds'):
     if Filename.endswith('.py'):
         bot.load_extension(f'cmds.{Filename[:-3]}')
