@@ -56,4 +56,5 @@ class quest(nextcord.ui.Modal):
 
         a=await interaction.channel.send(embed=em)
         await chat.send('好像有人需要幫助喔<#978924406745210900>')
-        await a.create_thread(name=str(help),auto_archive_duration=60)
+        quest_thread = await a.create_thread(name = str(help), auto_archive_duration=60)
+        await quest_thread.send(title)
