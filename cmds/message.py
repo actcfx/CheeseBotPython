@@ -12,6 +12,7 @@ class Message(Cog_Extension):
         quest_channel_id = 978924406745210900
         introduction_channel_id = 990553527547990046
         chat_channel = self.bot.get_channel(978708780445495328)
+
         bot_id = [972137604470407168, 992351373280690206, 1065293003532546090, 1070748028123750420]
         arcticfox_id = 407881227270356994
         hi_keyword = ['hi', 'Hi', 'hello', 'Hello','嗨']
