@@ -1,6 +1,5 @@
 import nextcord
 
-from cmds.role import role
 class EmbedModal(nextcord.ui.Modal):
     def __init__(self):
         super().__init__(

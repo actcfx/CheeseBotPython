@@ -10,7 +10,7 @@ class Introduction(Cog_Extension):
 
     @nextcord.slash_command(name = '自我介紹')
     async def 自我介紹(self, interaction:Interaction, message:User = nextcord.SlashOption(name = '要查詢的人', required = False)):
-        with open('/Users/arcticfox/Downloads/columbina/uid.json', 'r', encoding = 'utf-8') as uid:
+        with open('uid.json', 'r', encoding = 'utf-8') as uid:
             user_uid = json.load(uid)
 
         if (message is None) and (str(interaction.user.id) in user_uid):
