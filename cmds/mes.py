@@ -27,22 +27,20 @@ class Message(Cog_Extension):
                     await time_out.delete(delay = 30)
 
         elif (message.channel.id == introduction_channel_id):
-            with open('/Users/arcticfox/Downloads/columbina/uid.json', 'r', encoding='utf8') as uid:
+            with open('uid.json', 'r', encoding='utf8') as uid:
                 user_uid = json.load(uid)
             user_uid[str(message.author.id)]={}
             user_uid[str(message.author.id)]["content"] = message.content
             user_uid[str(message.author.id)]["id"] = message.id
-            with open('/Users/arcticfox/Downloads/columbina/uid.json', 'w', encoding='utf8') as uid:
+            with open('uid.json', 'w', encoding='utf8') as uid:
                 json.dump(user_uid, uid, indent = 2, ensure_ascii = False)
 
         elif message.content == '北極狐':
-            await message.channel.send("https://cdn.discordapp.com/attachments/1024158796840435732/1072579505077637130/A0F61329-4F0C-47A5-8788-3F54C6E7BD97.png")
+            await message.channel.send('https://upload.cc/i1/2023/02/08/QkjlHU.png')
 
         elif message.content == '容克':
-            await message.channel.send('https://cdn.discordapp.com/attachments/978708780445495328/1079750964279513119/7PTJUV.png')
-
-        elif message.content == '溫門':
-            await message.channel.send('倘若温迪有1000名信徒 我就是那千分之一\n倘若温迪有100名信徒 我就是那普通百分之一\n倘若温迪有10名信徒 我就是那坚定的是十分之一\n倘若温迪只有有1名信徒 我便是那至死不渝的唯一\n各位朋友停下脚步给我一分钟来了解一下风吟诗人我们的教主吗\n温门永复存在')
+            await message.channel.send('https://upload.cc/i1/2023/02/08/7PTJUV.png')
+            await message.channel.send('https://upload.cc/i1/2023/02/12/xD5fRl.png')
 
         elif (message.content in hi_keyword) and (message.author.id not in bot_id):
             await message.reply(f'hi {message.author.name}')
@@ -52,6 +50,9 @@ class Message(Cog_Extension):
 
         elif (message.content.startswith('6')) and (len(message.content) <= 10) and (message.author.id not in bot_id):
             await message.channel.send(message.content)
+
+#        elif (message.author.id == arcticfox_id):
+#            await message.reply('你真的是他媽幹話王欸')
 
 def setup(bot):
     bot.add_cog(Message(bot))
