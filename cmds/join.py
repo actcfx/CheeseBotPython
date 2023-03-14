@@ -3,7 +3,7 @@ import nextcord
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 
-with open('uid.json', 'r', encoding = 'utf8') as loli:
+with open('list.json', 'r', encoding = 'utf8') as loli:
     loli=json.load(loli)
 
 class Join(Cog_Extension):

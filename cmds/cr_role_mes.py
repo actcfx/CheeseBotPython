@@ -11,6 +11,7 @@ class Cr_role_mes(Cog_Extension):
         self.bot = bot
 
     @commands.command()
+    @commands.is_owner()
     async def cr_WL(self, ctx):
         embed = nextcord.Embed(
             title = "世界等級", description="領取你的世界等級", color=0x7b219f)
@@ -26,6 +27,7 @@ class Cr_role_mes(Cog_Extension):
             json.dump(roles, role)
 
     @commands.command()
+    @commands.is_owner()
     async def cr_server(self, ctx):
         embed = nextcord.Embed(
             title = "遊戲伺服器", description = "請選擇遊玩的伺服器", color = 0x7b219f)

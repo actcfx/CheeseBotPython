@@ -8,6 +8,7 @@ from nextcord.ext import commands
 class ban(Cog_Extension):
   @commands.command()
   @commands.has_any_role(1028710466664550490,1028710721942454292,"工程師")
+  @commands.has_any_role(978680963099942912, 979385876209610752, 978956326359138314, 1070679396165373984, 1080095809175035984)
   @commands.has_permissions(ban_members=True)
   async def ban(self,ctx,*,member,reason=None):
     c_r=member.replace('<','').replace('@','').replace('>','')
