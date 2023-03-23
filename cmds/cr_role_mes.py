@@ -3,7 +3,7 @@ import nextcord
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 
-with open("/Users/arcticfox/Downloads/columbina/roles.json", "r", encoding = "utf-8") as role:
+with open("roles.json", "r", encoding = "utf-8") as role:
     roles = json.load(role)
 
 class Cr_role_mes(Cog_Extension):
