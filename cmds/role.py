@@ -9,24 +9,25 @@ with open('roles.json', 'r', encoding='utf-8') as roles:
 role_mes_list = list(roles["role_mes"].values())
 
 role_list = [list(roles["world_level"].values())[:-1],
-                list(roles["server"].values())[:-1],
-                list(roles["announcement"].values())[:-1],
-                list(roles["guild_roles"].values())[:-1],
-                list(roles["eyes"].values())[:-1],]
+             list(roles["server"].values())[:-1],
+             list(roles["announcement"].values())[:-1],
+             list(roles["guild_roles"].values())[:-1],
+             list(roles["eyes"].values())[:-1],]
 
 emoji_list = [list(roles["world_level"])[:-1],
-                list(roles["server"])[:-1],
-                list(roles["announcement"])[:-1],
-                list(roles["guild_roles"])[:-1],
-                list(roles["eyes"])[:-1],]
+              list(roles["server"])[:-1],
+              list(roles["announcement"])[:-1],
+              list(roles["guild_roles"])[:-1],
+              list(roles["eyes"])[:-1],]
 
 repeatable_list = [list(roles["world_level"].values())[-1],
-                    list(roles["server"].values())[-1],
-                    list(roles["announcement"].values())[-1],
-                    list(roles["guild_roles"].values())[-1],
-                    list(roles["eyes"].values())[-1],]
+                   list(roles["server"].values())[-1],
+                   list(roles["announcement"].values())[-1],
+                   list(roles["guild_roles"].values())[-1],
+                   list(roles["eyes"].values())[-1],]
 
 server_roles = list(roles["server"].values())
+
 
 class Role(Cog_Extension):
     def __init__(self, bot):
@@ -65,16 +66,15 @@ class Role(Cog_Extension):
     async def on_raw_reaction_remove(self, payload):
         try:
             mes_id_index = role_mes_list.index(payload.message_id)
-            mes_id = payload.message_id
         except:
             return
 
         guild = self.bot.get_guild(payload.guild_id)
-        channel = guild.get_channel(payload.channel_id)
         member = guild.get_member(payload.user_id)
 
         role_index = emoji_list[mes_id_index].index(str(payload.emoji))
         await member.remove_roles(guild.get_role(role_list[mes_id_index][role_index]))
+
 
 def setup(bot):
     bot.add_cog(Role(bot))
