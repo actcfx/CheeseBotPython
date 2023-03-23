@@ -23,7 +23,7 @@ class Cr_role_mes(Cog_Extension):
             "https://media.discordapp.net/attachments/1045948166274555914/1045948629413793882/2560-1440.png")
         mes = await ctx.send(embed = embed)
         roles["role_mes"]["world_level_mes"] = mes.id
-        with open("/Users/arcticfox/Downloads/columbina/roles.json", "w", encoding = "utf-8") as role:
+        with open("roles.json", "w", encoding = "utf-8") as role:
             json.dump(roles, role)
 
     @commands.command()
@@ -39,7 +39,7 @@ class Cr_role_mes(Cog_Extension):
             "https://media.discordapp.net/attachments/1045948166274555914/1045948947488837703/3-11920x1080_.jpg")
         mes = await ctx.send(embed=embed)
         roles["role_mes"]["game_server_mes"] = mes.id
-        with open("/Users/arcticfox/Downloads/columbina/roles.json", "w", encoding="utf-8") as role:
+        with open("roles.json", "w", encoding="utf-8") as role:
             json.dump(roles, role)
 
 def setup(bot):
