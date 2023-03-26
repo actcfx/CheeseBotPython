@@ -1,5 +1,6 @@
 import json
 import nextcord
+from nextcord.ui import View, Button
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 
@@ -29,6 +30,14 @@ class Message(Cog_Extension):
         elif (message.channel.id == introduction_channel_id):
             with open('uid.json', 'r', encoding='utf8') as uid:
                 user_uid = json.load(uid)
+
+            if (user_uid.get(str(message.author.id)) == None):
+                tip4_button = Button(style = nextcord.ButtonStyle.link,
+                                     url = 'https://discord.com/channels/978680658740260865/978708780445495328', label = '聊天頻道')
+                button_view = View(timeout = 0)
+                button_view.add_item(tip4_button)
+                await message.reply("> 入群小助手\n你完成入群手續了，去聊天吧", view = button_view, delete_after = 180)
+
             user_uid[str(message.author.id)]={}
             user_uid[str(message.author.id)]["content"] = message.content
             user_uid[str(message.author.id)]["id"] = message.id
