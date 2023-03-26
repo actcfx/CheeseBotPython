@@ -9,7 +9,7 @@ class Cr_tip(Cog_Extension):
 
     @commands.command()
     @commands.is_owner()
-    async def cr_role_tip(self,ctx):
+    async def cr_role_tip(self, ctx):
         tip1_button = Button(style = nextcord.ButtonStyle.link,
                           url = 'https://discord.com/channels/978680658740260865/978740632086523914/996519987160293486', label = '點我前往領取')
         button_view = View(timeout = 0)
@@ -17,6 +17,7 @@ class Cr_tip(Cog_Extension):
         await ctx.send("> 入群小助手\n閱讀完群規了嗎，接下來去領取身份組吧", view = button_view)
 
     @commands.command()
+    @commands.is_owner()
     async def cr_roles_tip(self, ctx):
         tip2_button1 = Button(style = nextcord.ButtonStyle.link,
                               url = 'https://discord.com/channels/978680658740260865/1079677816192372817/1079813967570022421', label='點我前往領取')
@@ -28,6 +29,7 @@ class Cr_tip(Cog_Extension):
         await ctx.send("> 入群小助手\n接著繼續領取原神相關身份組，或是直接聊天去吧", view = button_view)
 
     @commands.command()
+    @commands.is_owner()
     async def cr_gen_tip(self, ctx):
         tip3_button = Button(style = nextcord.ButtonStyle.link,
                              url = 'https://discord.com/channels/978680658740260865/990553527547990046', label = '點我前往')

@@ -54,4 +54,4 @@ for Filename in os.listdir('cmds'):
         bot.load_extension(f'cmds.{Filename[:-3]}')
 
 if __name__ == '__main__':
-    bot.run(token_data['token1'])
+    bot.run(token_data['token2'])
