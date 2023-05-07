@@ -1,12 +1,13 @@
 import nextcord
+from datetime import datetime
 from nextcord.ext import commands
 from core.classes import Cog_Extension
-from datetime import datetime
+
 
 class Count_down(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
-        self.exam_date = datetime(2023, 5, 7)
+        self.exam_date = datetime(2023, 5, 6)
 
     @nextcord.slash_command(name='去讀書', description='提醒水到渠程滾去讀書')
     async def count(self, interaction: nextcord.Interaction):

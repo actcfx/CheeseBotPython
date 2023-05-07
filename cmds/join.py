@@ -3,7 +3,7 @@ import nextcord
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 
-with open('list.json', 'r', encoding = 'utf8') as loli:
+with open('data/list.json', 'r', encoding = 'utf8') as loli:
     loli=json.load(loli)
 
 class Join(Cog_Extension):
@@ -24,7 +24,7 @@ class Join(Cog_Extension):
         embeds.set_image("https://upload.cc/i1/2022/11/10/rb6dCB.png")
 
         if member.guild.id == potato_id:
-            await channels['potato_ch'].send(f'{member.mention} 歡迎來到移民署，請備好你的護照和機票錢')
+            await self.bot.get_channel(1094600607442149397).send(f'{member.mention} 歡迎來到移民署，請備好你的護照和機票錢')
         elif member.guild.id == charlotte_id:
             if member.id in loli['ban']:
                 await member.ban(reason = '機器人行為')

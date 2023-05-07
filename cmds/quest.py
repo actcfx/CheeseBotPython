@@ -13,7 +13,7 @@ class quest (Cog_Extension):
 
   @nextcord.slash_command(name='求助',description='發送求助')
   async def 委託(self,interaction:nextcord.Interaction):
-    with open('uid.json','r',encoding='utf8') as uid:
+    with open('data/uid.json','r',encoding='utf8') as uid:
         user_uid=json.load(uid)
     if str(interaction.user.id) in user_uid:
       try:

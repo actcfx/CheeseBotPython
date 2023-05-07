@@ -28,7 +28,7 @@ class Message(Cog_Extension):
                     await time_out.delete(delay = 30)
 
         elif (message.channel.id == introduction_channel_id):
-            with open('uid.json', 'r', encoding='utf8') as uid:
+            with open('data/uid.json', 'r', encoding='utf8') as uid:
                 user_uid = json.load(uid)
 
             if (user_uid.get(str(message.author.id)) == None):
@@ -41,7 +41,7 @@ class Message(Cog_Extension):
             user_uid[str(message.author.id)]={}
             user_uid[str(message.author.id)]["content"] = message.content
             user_uid[str(message.author.id)]["id"] = message.id
-            with open('uid.json', 'w', encoding='utf8') as uid:
+            with open('data/uid.json', 'w', encoding='utf8') as uid:
                 json.dump(user_uid, uid, indent = 2, ensure_ascii = False)
 
         elif message.content == '北極狐':

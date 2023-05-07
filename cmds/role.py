@@ -6,7 +6,7 @@ from nextcord.ext import commands
 from core.classes import Cog_Extension
 
 roles = {}
-with open('roles.json', 'r', encoding='utf-8') as f:
+with open('data/roles.json', 'r', encoding='utf-8') as f:
     roles = json.load(f)
 
 role_mes_deque = collections.deque(roles["role_mes"].values())
