@@ -12,7 +12,7 @@ class tmp_channel(Cog_Extension):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        with open('list.json', 'r', encoding = 'utf-8') as list:
+        with open('data/list.json', 'r', encoding = 'utf-8') as list:
             list1 = json.load(list)
         tmp_channels_list = list1['tmp_channels']
 
@@ -38,7 +38,7 @@ class tmp_channel(Cog_Extension):
                     if before.channel.members == []:
                         await before.channel.delete()
                         tmp_channels_list.remove(int(before.channel.id))
-                        with open('list.json', 'w', encoding='utf-8') as list:
+                        with open('data/list.json', 'w', encoding='utf-8') as list:
                             json.dump(list1,list)
                         print(f'-> Delete temporary_channel {before.channel.name}!')
             elif before.channel != None:    #如果之前所在的頻道為其他的語音頻道
@@ -46,7 +46,7 @@ class tmp_channel(Cog_Extension):
                     if before.channel.members == []:
                         await before.channel.delete()
                         tmp_channels_list.remove(int(before.channel.id))
-                        with open('list.json', 'w', encoding='utf-8') as list:
+                        with open('data/list.json', 'w', encoding='utf-8') as list:
                             json.dump(list1,list)
                         print(before.id)
 
@@ -57,13 +57,13 @@ class tmp_channel(Cog_Extension):
                         if int(before.channel.id) in tmp_channels_list:
                             await before.channel.delete()
                             tmp_channels_list.remove(int(before.channel.id))
-                            with open('list.json', 'w', encoding='utf-8') as list:
+                            with open('data/list.json', 'w', encoding='utf-8') as list:
                                 json.dump(list1,list)
                             print(f'-> Delete temporary_channel {before.channel.name}!')
                 except:
-                    now_channel = await s.create_voice_channel(f'└[{str(member).split("#")[0]}] 的頻道', overwrites = create_channel, category = s2, bitrate = 384000)  #設置名稱
+                    now_channel = await s.create_voice_channel(f'└[{str(member).split("#")[0]}] 的頻道', overwrites = create_channel, category = s2, bitrate = 256000)  #設置名稱
                     tmp_channels_list.append(int(now_channel.id))
-                    with open('list.json', 'w', encoding='utf-8') as list:
+                    with open('data/list.json', 'w', encoding='utf-8') as list:
                         json.dump(list1,list)
                     await member.move_to(now_channel)
                     print(f'-> Create temporary_channel {now_channel.name}!')
@@ -73,7 +73,7 @@ class tmp_channel(Cog_Extension):
                         if before.channel.members == []:
                             await before.channel.delete()
                             tmp_channels_list.remove(int(before.channel.id))
-                            with open('list.json', 'w', encoding='utf-8') as list:
+                            with open('data/list.json', 'w', encoding='utf-8') as list:
                                 json.dump(list1,list)
                             print(f'-> Delete temporary_channel {before.channel.name}!')
                 except:
@@ -85,12 +85,12 @@ class tmp_channel(Cog_Extension):
                     if before.channel.members == []:
                         await before.channel.delete()
                         tmp_channels_list.remove(int(before.channel.id))
-                        with open('list.json', 'w', encoding='utf-8') as list:
+                        with open('data/list.json', 'w', encoding='utf-8') as list:
                             json.dump(list1,list)
                         print(f'-> Delete temporary_channel {before.channel.name}!')
-                now_channel = await s.create_voice_channel(f'└[{str(member).split("#")[0]}] 的頻道', overwrites = create_channel, category = s2, bitrate = 384000)  #設置名稱
+                now_channel = await s.create_voice_channel(f'└[{str(member).split("#")[0]}] 的頻道', overwrites = create_channel, category = s2, bitrate = 256000)  #設置名稱
                 tmp_channels_list.append(int(now_channel.id))
-                with open('list.json', 'w', encoding='utf-8') as list:
+                with open('data/list.json', 'w', encoding='utf-8') as list:
                     json.dump(list1,list)
                 await member.move_to(now_channel)
                 print(f'-> Create temporary_channel {now_channel.name}!')
@@ -99,7 +99,7 @@ class tmp_channel(Cog_Extension):
                     if int(before.channel.id) in tmp_channels_list:
                         await before.channel.delete()
                         tmp_channels_list.remove(int(before.channel.id))
-                        with open('list.json', 'w', encoding='utf-8') as list:
+                        with open('data/list.json', 'w', encoding='utf-8') as list:
                             json.dump(list1,list)
                         print(f'-> Delete temporary_channel {before.channel.name}!')
 
@@ -107,11 +107,11 @@ class tmp_channel(Cog_Extension):
     @commands.command()
     @commands.has_permissions(ban_members = True)
     async def append(self, ctx, channel_id: int):
-        with open('list.json', 'r', encoding = 'utf-8') as list:
+        with open('data/list.json', 'r', encoding = 'utf-8') as list:
             list1 = json.load(list)
 
         list1['tmp_channels'].append(channel_id)
-        with open('list.json', 'w', encoding='utf-8') as list:
+        with open('data/list.json', 'w', encoding='utf-8') as list:
             json.dump(list1,list)
 
         await ctx.send(f'添加動態語音頻道 {channel_id} 成功')
@@ -120,11 +120,11 @@ class tmp_channel(Cog_Extension):
     @commands.command()
     @commands.has_permissions(ban_members = True)
     async def remove(self, ctx, channel_id: int):
-        with open('list.json', 'r', encoding = 'utf-8') as list:
+        with open('data/list.json', 'r', encoding = 'utf-8') as list:
             list1 = json.load(list)
 
         list1['tmp_channels'].remove(channel_id)
-        with open('list.json', 'w', encoding='utf-8') as list:
+        with open('data/list.json', 'w', encoding='utf-8') as list:
             json.dump(list1,list)
 
         await ctx.send(f'刪除動態語音頻道 {channel_id} 成功')

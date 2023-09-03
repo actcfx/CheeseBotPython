@@ -1,7 +1,6 @@
 from nextcord import User
 from core.classes import Cog_Extension
 import nextcord
-import json
 from nextcord.ext import commands
 class kick (Cog_Extension):
     def __init__(self, bot):

@@ -6,7 +6,7 @@ from nextcord.ext import commands
 from core.classes import Cog_Extension
 
 roles = {}
-with open('roles.json', 'r', encoding='utf-8') as f:
+with open('data/roles.json', 'r', encoding='utf-8') as f:
     roles = json.load(f)
 
 role_mes_deque = collections.deque(roles["role_mes"].values())
@@ -43,6 +43,14 @@ class Role(Cog_Extension):
         self.bot = bot
 
     @commands.Cog.listener()
+    async def on_ready(self):
+        guild = self.bot.get_guild(978680658740260865)
+        for member in guild.members:
+            if guild.get_role(978732220154007613) not in member.roles:
+                 await member.add_roles(guild.get_role(978732220154007613))
+
+
+    @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         try:
             mes_id_index = role_mes_deque.index(payload.message_id)
@@ -57,6 +65,9 @@ class Role(Cog_Extension):
 
         role_index = emoji_deques[mes_id_index].index(str(payload.emoji))
         await payload.member.add_roles(guild.get_role(role_deques[mes_id_index][role_index]))
+
+        if guild.get_role(978732220154007613) not in payload.member.roles:
+            await payload.member.add_roles(guild.get_role(978732220154007613))
 
         if repeatable_deque[mes_id_index] == True:
             return

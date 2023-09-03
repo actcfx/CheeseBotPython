@@ -53,7 +53,7 @@ class quest(nextcord.ui.Modal):
         em.add_field(name="求助人", value=f"{interaction.user.mention}",inline=False)
         em.add_field(name="求助事項", value=help, inline=False)
 
-        a=await interaction.channel.send(embed=em)
+        a = await interaction.channel.send(embed = em)
         await chat.send('好像有人需要幫助喔<#978924406745210900>')
         quest_thread = await a.create_thread(name = str(help), auto_archive_duration=60)
         await quest_thread.send(title)

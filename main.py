@@ -6,8 +6,8 @@ from unicodedata import name
 from nextcord.ext import commands
 
 bot = commands.Bot(command_prefix = '%', intents = nextcord.Intents.all())
-with open('token.json', 'r', encoding='utf8') as token:
-    token_data = json.load(token)
+with open('data/token.json', 'r', encoding='utf8') as token_json:
+    token_data = json.load(token_json)
 
 #bot is online
 @bot.event
