@@ -16,7 +16,8 @@ class Join(Cog_Extension):
         charlotte_id = 978680658740260865
         channels = {'potato_ch': self.bot.get_channel(1078651841191100486),
                     'charlotte_wel_ch': self.bot.get_channel(978680659428147292),
-                    'charlotte_chat_ch': self.bot.get_channel(978708780445495328),}
+                    'charlotte_chat_ch': self.bot.get_channel(978708780445495328)}
+        
         embeds=nextcord.Embed(title = "大東亞帝國", description = "大明王朝Ming dynasty", color = 0xe32626)
         embeds.add_field(name = "新手須知", value = f"{member.mention} 請詳閱 <#978707952640872548> 以了解伺服器規範！\n 同時可以透過 <#978708014695600188> 熟悉頻道功能，\n 如果想快速認識大家可以到 <#990553527547990046> 。", inline = False)
         embeds.add_field(name = "身分組領取", value = "並且可透過 <#978740632086523914> 開啟色色區或者是內鬼情報區哦！", inline = False)
