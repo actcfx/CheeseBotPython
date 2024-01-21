@@ -1,0 +1,17 @@
+{
+    "file_error": {
+        "title": "檔案處理錯誤",
+        "message": "❌｜檔案內容有誤喔，再確認一下吧！",
+        "color": 16703457
+    },
+    "permission_error": {
+        "title": "權限錯誤",
+        "message": "❌｜你沒有權限使用這個指令唷！",
+        "color": 16210991
+    },
+    "unexpected_error": {
+        "title": "未知錯誤",
+        "message": "❌｜已經回報給工程師囉，可以再試一次，如果還是不行的話，找管理員幫忙吧！",
+        "color": 13310789
+    }
+}

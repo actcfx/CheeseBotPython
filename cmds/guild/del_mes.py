@@ -11,17 +11,13 @@ class Deleted_mes(Cog_Extension):
     async def on_message_delete(self, message):
         if message.guild.id == 978680658740260865:
             channel = self.bot.get_channel(1077322125641252996)
-            embed = nextcord.Embed(title='Message Deleted', color=0xff0000)
-            embed.add_field(
-                name='Author', value=message.author.mention, inline=False)
-            embed.add_field(
-                name='Channel', value=message.channel.mention, inline=False)
+            embed = nextcord.Embed(title="Message Deleted", color=0xFF0000)
+            embed.add_field(name="Author", value=message.author.mention, inline=False)
+            embed.add_field(name="Channel", value=message.channel.mention, inline=False)
             if message.content:
-                embed.add_field(
-                    name='Content', value=message.content, inline=False)
+                embed.add_field(name="Content", value=message.content, inline=False)
             for attachment in message.attachments:
-                embed.add_field(name='Attachment',
-                                value=attachment.url, inline=False)
+                embed.add_field(name="Attachment", value=attachment.url, inline=False)
             del_mes = await channel.send(embed=embed)
             del_mes_url = del_mes.jump_url
 
@@ -32,7 +28,9 @@ class Deleted_mes(Cog_Extension):
 
             if len(message.attachments) > 0:
                 for attachment in message.attachments:
-                    await dest_channel.send('↓ ' + del_mes_url, file=await attachment.to_file())
+                    await dest_channel.send(
+                        "↓ " + del_mes_url, file=await attachment.to_file()
+                    )
 
 
 def setup(bot):
