@@ -1,14 +1,15 @@
 import nextcord
+from nextcord import Embed
 from nextcord.ui import View, Button
 from core.classes import ErrorHandler
 
 
 class Pagination_View(View):
-    def __init__(self, _total_pages: int, _embeds: list[nextcord.Embed]):
+    def __init__(self, _total_pages: int, _embeds: list[Embed]):
         super().__init__(timeout=None)
-        self.current_page = 0
-        self.total_pages = _total_pages
-        self.embeds = _embeds
+        self.current_page: int = 0
+        self.total_pages: int = _total_pages
+        self.embeds: list[Embed] = _embeds
 
         self.previous_button = Button(label="<", style=nextcord.ButtonStyle.grey)
         self.next_button = Button(label=">", style=nextcord.ButtonStyle.grey)
@@ -18,17 +19,17 @@ class Pagination_View(View):
 
         self.add_item(self.next_button)
 
-    def update_buttons(self):
+    def update_buttons(self) -> None:
         self.clear_items()
         if self.current_page == 0:
             self.add_item(self.next_button)
-        elif self.current_page == self.total_pages - 1:
+        elif self.current_page == (self.total_pages - 1):
             self.add_item(self.previous_button)
         else:
             self.add_item(self.previous_button)
             self.add_item(self.next_button)
 
-    async def previous_button_callback(self, interaction: nextcord.Interaction):
+    async def previous_button_callback(self, interaction: nextcord.Interaction) -> None:
         try:
             if self.current_page > 0:
                 self.current_page -= 1
@@ -45,7 +46,7 @@ class Pagination_View(View):
                 error_type="unexpected_error",
             )
 
-    async def next_button_callback(self, interaction: nextcord.Interaction):
+    async def next_button_callback(self, interaction: nextcord.Interaction) -> None:
         try:
             if self.current_page < self.total_pages:
                 self.current_page += 1

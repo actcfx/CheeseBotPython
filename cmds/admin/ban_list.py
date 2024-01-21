@@ -3,10 +3,11 @@ import json
 import nextcord
 from nextcord.ext import commands
 from core.views import Pagination_View
+from nextcord import Interaction, SlashOption, Embed
 from core.classes import Cog_Extension, ConfigData, ErrorHandler
 
 ADMIN_DATA: json = ConfigData.load_data("config/roles.json")
-ADMIN_ROLES_ID: dict = ADMIN_DATA["admin_roles"].values()
+ADMIN_ROLES_ID: dict[int] = ADMIN_DATA["admin_roles"].values()
 
 
 class Ban_list(Cog_Extension):
@@ -17,8 +18,8 @@ class Ban_list(Cog_Extension):
     @nextcord.slash_command(name="ban人清單", description="顯示ban list")
     async def ban人清單(
         self,
-        interaction: nextcord.Interaction,
-        number: int = nextcord.SlashOption(
+        interaction: Interaction,
+        number: int = SlashOption(
             name="人數",
             required=False,
             description="一頁顯示幾筆資料（5~25）",
@@ -32,8 +33,8 @@ class Ban_list(Cog_Extension):
 
         try:
             ban_list: list[int] = ConfigData.load_data("data/ban_list.json").get("ban")
-            total_pages = int(math.ceil(len(ban_list) / number))
-            ban_list_embeds = []
+            total_pages: int = math.ceil(len(ban_list) / number)
+            ban_list_embeds: list[Embed] = []
 
             for page in range(total_pages + 1):
                 ban_list_embeds.append(
@@ -41,8 +42,8 @@ class Ban_list(Cog_Extension):
                 )
 
             view = Pagination_View(total_pages, ban_list_embeds)
-            await interaction.delete_original_message()
             await interaction.channel.send(embed=ban_list_embeds[0], view=view)
+            await interaction.delete_original_message()
 
         except Exception as unexpected_error:
             await ErrorHandler.handle_error(
@@ -61,7 +62,7 @@ class Ban_list(Cog_Extension):
         _number: int,
         _total_pages: int,
     ):
-        ban_list_embed = nextcord.Embed(title="ban人清單", color=0xFFE380)
+        ban_list_embed = Embed(title="ban人清單", color=0xFFE380)
         ban_list_embed.set_footer(
             text=f"第 {_page + 1}/{_total_pages} 頁，共 {len(_ban_list)} 人"
         )
