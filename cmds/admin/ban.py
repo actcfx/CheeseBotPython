@@ -31,12 +31,25 @@ class Ban(Cog_Extension):
         ),
     ):
         try:
+            VIOLATION_CHANNEL = interaction.guild.get_channel(
+                ConfigData.load_data("config/channels.json").get("violation_channel")
+            )
             deleted_count: int = 0
 
             await interaction.response.defer(ephemeral=True)
 
             # ban 人
-            # await member.ban(reason=reason)
+            await member.ban(reason=reason)
+
+            # 發送違規紀錄到違規紀錄區
+            violation_embed = nextcord.Embed(color=0x227D51)
+            violation_embed.set_author(name="違規紀錄")
+            violation_embed.set_thumbnail(url=member.avatar.url)
+            violation_embed.add_field(name="違規者：", value=member.mention, inline=False)
+            violation_embed.add_field(name="違規事項：", value=reason, inline=False)
+            violation_embed.add_field(name="違規處分：", value="停權", inline=False)
+            violation_embed.timestamp = datetime.datetime.now()
+            await VIOLATION_CHANNEL.send(embed=violation_embed)
 
             if delete_previous_hours != 0:
                 original_message = await interaction.followup.send(
