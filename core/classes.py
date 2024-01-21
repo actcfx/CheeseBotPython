@@ -46,7 +46,7 @@ class ErrorHandler:
         error_embed = Embed(title=command, color=COLOR, description=MESSAGE)
         error_embed.set_author(name=TITLE, icon_url=self.bot.user.avatar.url)
         error_embed.set_footer(
-            text=f"開發：{DEVELOPER.global_name} • 版本：{VERSION}",
+            text=f"開發：{DEVELOPER.global_name}・版本：{VERSION}",
             icon_url=DEVELOPER.avatar.url,
         )
         error_embed.timestamp = datetime.datetime.now()
