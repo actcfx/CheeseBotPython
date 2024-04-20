@@ -6,12 +6,12 @@
     },
     "permission_error": {
         "title": "權限錯誤",
-        "message": "❌｜你沒有權限使用這個指令唷！",
+        "message": "❌｜你沒有使用這個指令的權限唷！",
         "color": 16210991
     },
     "unexpected_error": {
         "title": "未知錯誤",
-        "message": "❌｜已經回報給工程師囉，可以再試一次，如果還是不行的話，找管理員幫忙吧！",
+        "message": "❌｜已經回報給工程師囉！",
         "color": 13310789
     }
 }

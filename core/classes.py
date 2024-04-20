@@ -18,6 +18,32 @@ class ConfigData:
         with open(_path, "w", encoding="utf-8") as file:
             json.dump(_data, file, indent=4)
 
+
+class PermissionChecker:
+    async def has_any_roles(
+        self,
+        check_interaction: Interaction,
+        check_command: str,
+    ) -> bool:
+        ADMIN_ROLES_SET = set(
+            ConfigData.load_data("config/roles.json").get("admin_roles").values()
+        )
+        USER_ROLES_SET = set(role.id for role in check_interaction.user.roles)
+
+        # 檢查使用者是否具有權限
+        if not USER_ROLES_SET.intersection(ADMIN_ROLES_SET):
+            await ErrorHandler.handle_error(
+                self,
+                check_interaction,
+                command=check_command,
+                error_content="Missing Permissions for this command",
+                error_type="permission_error"
+            )
+            return False
+        else:
+            return True
+
+
 class ErrorHandler:
     async def handle_error(
         self,
@@ -26,8 +52,6 @@ class ErrorHandler:
         error_content: Exception,
         error_type: str,
     ) -> None:
-        """Handles errors that occur during the execution of a slash command."""
-
         LOG_CHANNEL: channel = interaction.guild.get_channel(
             ConfigData.load_data("config/channels.json").get("log_channel")
         )
