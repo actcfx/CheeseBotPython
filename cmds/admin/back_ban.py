@@ -1,5 +1,4 @@
 import math
-import json
 import nextcord
 from core.views import Pagination_View
 from nextcord import Interaction, SlashOption, User, Embed
