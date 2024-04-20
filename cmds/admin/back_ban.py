@@ -85,7 +85,7 @@ class BackBan(Cog_Extension):
     async def ban_list(
         self,
         interaction: Interaction,
-        number: int = SlashOption(
+        limit: int = SlashOption(
             name="顯示幾筆資料",
             required=False,
             description="一頁顯示幾筆資料（5~25）",
@@ -102,12 +102,12 @@ class BackBan(Cog_Extension):
             ): return
 
             ban_list: list[int] = ConfigData.load_data("data/ban_list.json")
-            total_pages: int = math.ceil(len(ban_list) / number)
+            total_pages: int = math.ceil(len(ban_list) / limit)
             ban_list_embeds: list[Embed] = []
 
             for page in range(total_pages + 1):
                 ban_list_embeds.append(
-                    self.set_ban_list_embed(ban_list, page, number, total_pages)
+                    self.set_ban_list_embed(ban_list, page, limit, total_pages)
                 )
 
             view = Pagination_View(total_pages, ban_list_embeds)
