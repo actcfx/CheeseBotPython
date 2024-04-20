@@ -10,44 +10,80 @@ class BackBan(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
 
-    
+    @nextcord.slash_command(name="join_ban", description="join ban")
+    async def join_ban(
+        self,
+        interaction: nextcord.Interaction,
+        user: nextcord.User = nextcord.SlashOption(
+            name="要ban的人或id", required=True
+        ),
+    ):
+        await interaction.response.defer(ephemeral=True)
 
-    # @commands.has_permissions(ban_members=True)
-    # @nextcord.slash_command(name="join_ban", description="join ban")
-    # async def join_ban(
-    #     self,
-    #     interaction: nextcord.Interaction,
-    #     member: nextcord.User = nextcord.SlashOption(name="成員", required=False),
-    # ):
-    #     with open("data/list.json", "r", encoding="utf8") as loli:
-    #         loli1 = json.load(loli)
-    #     c_r = member.replace("<", "").replace("@", "").replace(">", "")
+        try:
+            if not await PermissionChecker.have_roles(
+                self, interaction, check_command="ban 人清單"
+            ): return
 
-    #     c = str(c_r).split(" ")
-    #     for c_kick in c:
-    #         loli1["ban"].append(int(c_kick))
-    #     with open("data/list.json", "w", encoding="utf8") as loli:
-    #         json.dump(loli1, loli)
-    #     await ctx.send("Join ban successful!")
-    #     print(f"-> Join {c_r} to ban list!")
+            if user:
+                user_id = user.id
 
-    # @commands.command()
-    # @commands.has_permissions(ban_members=True)
-    # async def remove_ban(self, ctx, *, member):
-    #     with open("data/list.json", "r", encoding="utf8") as loli:
-    #         loli1 = json.load(loli)
-    #     c_r = member.replace("<", "").replace("@", "").replace(">", "")
+            ban_list: list[int] = ConfigData.load_data("data/ban_list.json")
 
-    #     c = str(c_r).split(" ")
-    #     for c_kick in c:
-    #         loli1["ban"].remove(int(c_kick))
-    #     with open("data/list.json", "w", encoding="utf8") as loli:
-    #         json.dump(loli1, loli)
-    #     await ctx.send("Remove ban successful!")
-    #     print(f"-> Remove {c_r} from ban list!")
+            if user_id in ban_list:
+                return
+            else:
+                ban_list.append(user_id)
+                ConfigData.save_data("data/ban_list.json", ban_list)
+                await interaction.followup.send(f"已將 {user_id} 加入 ban list")
 
-    @nextcord.slash_command(name="ban人清單", description="顯示ban list")
-    async def ban人清單(
+        except Exception as unexpected_error:
+            await ErrorHandler.handle_error(
+                self,
+                interaction,
+                command="join_ban",
+                error_content=unexpected_error,
+                error_type="unexpected_error",
+            )
+
+    @nextcord.slash_command(name="remove_ban", description="remove ban")
+    async def remove_ban(
+        self,
+        interaction: nextcord.Interaction,
+        user: nextcord.User = nextcord.SlashOption(name="要remove_ban的人或id", required=True),
+    ):
+        await interaction.response.defer(ephemeral=True)
+
+        try:
+            if not await PermissionChecker.have_roles(
+                self, interaction, check_command="ban 人清單"
+            ):
+                return
+
+            if user:
+                user_id = user.id
+
+            ban_list: list[int] = ConfigData.load_data("data/ban_list.json")
+
+            if user_id in ban_list:
+                ban_list.remove(user_id)
+                ConfigData.save_data("data/ban_list.json", ban_list)
+                await interaction.followup.send(f"已將 {user_id} 從 ban list 移除")
+            else:
+                await interaction.followup.send(f"{user_id} 不在 ban list 裡")
+                return
+
+        except Exception as unexpected_error:
+            await ErrorHandler.handle_error(
+                self,
+                interaction,
+                command="remove_ban",
+                error_content=unexpected_error,
+                error_type="unexpected_error",
+            )
+
+    @nextcord.slash_command(name="ban_list", description="顯示ban list")
+    async def ban_list(
         self,
         interaction: Interaction,
         number: int = SlashOption(
@@ -62,12 +98,11 @@ class BackBan(Cog_Extension):
         await interaction.response.defer(ephemeral=True)
 
         try:
-            if not await PermissionChecker.has_any_roles(
-                self, interaction, check_command="ban 人清單"
-            ):
-                return
+            if not await PermissionChecker.have_roles(
+                self, interaction, check_command="ban_list"
+            ): return
 
-            ban_list: list[int] = ConfigData.load_data("data/ban_list.json").get("ban")
+            ban_list: list[int] = ConfigData.load_data("data/ban_list.json")
             total_pages: int = math.ceil(len(ban_list) / number)
             ban_list_embeds: list[Embed] = []
 
@@ -84,7 +119,7 @@ class BackBan(Cog_Extension):
             await ErrorHandler.handle_error(
                 self,
                 interaction,
-                command="ban 人清單",
+                command="ban_list",
                 error_content=unexpected_error,
                 error_type="unexpected_error",
             )
