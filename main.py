@@ -61,6 +61,7 @@ for foldername in os.listdir("cmds"):
                 print(
                     f"❌ | {foldername}/{filename} has passed, because of an unexpected error [{cog_load_error}]"
                 )
+
 print("--------------------------------------------------")
 
 

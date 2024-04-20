@@ -20,7 +20,7 @@ class ConfigData:
 
 
 class PermissionChecker:
-    async def has_any_roles(
+    async def have_roles(
         self,
         check_interaction: Interaction,
         check_command: str,

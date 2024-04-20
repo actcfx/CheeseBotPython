@@ -6,8 +6,13 @@
     },
     "permission_error": {
         "title": "權限錯誤",
-        "message": "❌｜你沒有使用這個指令的權限唷！",
+        "message": "❌｜你沒有使用這個指令的權限！",
         "color": 16210991
+    },
+    "empty_input_error": {
+        "title": "未接收到輸入",
+        "message": "❌｜請至少輸入一項內容！",
+        "color": 14458804
     },
     "unexpected_error": {
         "title": "未知錯誤",

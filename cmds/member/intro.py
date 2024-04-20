@@ -12,7 +12,7 @@ class Introduction(Cog_Extension):
         self.bot = bot
 
     @nextcord.slash_command(name="自我介紹")
-    async def introduction(
+    async def 自我介紹(
         self,
         interaction: Interaction,
         user: nextcord.User = nextcord.SlashOption(name="要查詢的人", required=False),
