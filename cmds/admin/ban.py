@@ -66,6 +66,7 @@ class Ban(Cog_Extension):
     #             error_content=unexpected_error,
     #             error_type="unexpected_error",
     #         )
+    pass
 
 
 def setup(bot):
