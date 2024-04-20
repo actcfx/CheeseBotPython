@@ -2,7 +2,7 @@ import math
 import json
 import nextcord
 from core.views import Pagination_View
-from nextcord import Interaction, SlashOption, Embed
+from nextcord import Interaction, SlashOption, User, Embed
 from core.classes import Cog_Extension, ConfigData, PermissionChecker, ErrorHandler
 
 
@@ -13,8 +13,8 @@ class BackBan(Cog_Extension):
     @nextcord.slash_command(name="join_ban", description="join ban")
     async def join_ban(
         self,
-        interaction: nextcord.Interaction,
-        user: nextcord.User = nextcord.SlashOption(
+        interaction: Interaction,
+        user: User = SlashOption(
             name="要ban的人或id", required=True
         ),
     ):
@@ -49,8 +49,8 @@ class BackBan(Cog_Extension):
     @nextcord.slash_command(name="remove_ban", description="remove ban")
     async def remove_ban(
         self,
-        interaction: nextcord.Interaction,
-        user: nextcord.User = nextcord.SlashOption(name="要remove_ban的人或id", required=True),
+        interaction: Interaction,
+        user: User = SlashOption(name="要remove_ban的人或id", required=True),
     ):
         await interaction.response.defer(ephemeral=True)
 
