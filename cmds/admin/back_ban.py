@@ -112,8 +112,7 @@ class BackBan(Cog_Extension):
                 )
 
             view = Pagination_View(total_pages, ban_list_embeds)
-            await interaction.channel.send(embed=ban_list_embeds[0], view=view)
-            await interaction.delete_original_message()
+            await interaction.followup.send(embed=ban_list_embeds[0], view=view)
 
         except Exception as unexpected_error:
             await ErrorHandler.handle_error(
