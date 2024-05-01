@@ -58,7 +58,7 @@ class ErrorHandler:
 
         # 取得機器人資訊
         BOT_INFO: json = ConfigData.load_data("config/bot_info.json")
-        DEVELOPER: Member = interaction.guild.get_member(BOT_INFO.get("developer"))
+        DEVELOPER: Member = interaction.guild.get_member(BOT_INFO.get("developer_id"))
         VERSION: str = BOT_INFO.get("version")
 
         # 取得錯誤訊息內容
