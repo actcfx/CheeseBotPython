@@ -27,13 +27,13 @@ class BackBan(Cog_Extension):
             if user:
                 user_id = user.id
 
-            ban_list: list[int] = ConfigData.load_data("data/ban_list.json")
+            BAN_LIST: list[int] = ConfigData.load_data("data/ban_list.json")
 
-            if user_id in ban_list:
+            if user_id in BAN_LIST:
                 return
             else:
-                ban_list.append(user_id)
-                ConfigData.save_data("data/ban_list.json", ban_list)
+                BAN_LIST.append(user_id)
+                ConfigData.save_data("data/ban_list.json", BAN_LIST)
                 await interaction.followup.send(f"已將 {user_id} 加入 ban list")
 
         except Exception as unexpected_error:

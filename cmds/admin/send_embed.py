@@ -1,5 +1,6 @@
 import json
 import nextcord
+from nextcord import File
 from json import JSONDecodeError
 from nextcord.ext import commands
 from core.classes import Cog_Extension, ErrorHandler
@@ -19,15 +20,15 @@ class SendEmbed(Cog_Extension):
             await interaction.response.defer(ephemeral=True)
 
             # 讀取附件中的 JSON 內容
-            attachment_file = await attachment.to_file()
-            content: json = json.loads(attachment_file.fp.read().decode("utf-8"))
+            ATTACHMENT_FILE: File = await attachment.to_file()
+            CONTENT: json = json.loads(ATTACHMENT_FILE.fp.read().decode("utf-8"))
 
             # 處理普通消息
-            if "content" in content:
-                await interaction.channel.send(content["content"])
+            if "content" in CONTENT:
+                await interaction.channel.send(CONTENT["content"])
 
             # 處理嵌入消息
-            for embed_data in content.get("embeds", []):
+            for embed_data in CONTENT.get("embeds", []):
                 embed = nextcord.Embed.from_dict(embed_data)
                 await interaction.channel.send(embed=embed)
 
