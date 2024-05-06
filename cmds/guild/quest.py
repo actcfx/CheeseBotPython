@@ -1,9 +1,9 @@
 import re
 import json
 import nextcord
-from core.classes import Cog_Extension
-from modal import QuestModal
-from nextcord.ext import commands
+from nextcord import Interaction
+from core.modals import QuestModal
+from core.classes import Cog_Extension, ErrorHandler, ConfigData
 
 
 class Quest(Cog_Extension):
@@ -11,30 +11,23 @@ class Quest(Cog_Extension):
         self.bot = bot
 
     @nextcord.slash_command(name="求助", description="發送求助")
-    async def 求助(self, interaction: nextcord.Interaction):
+    async def 求助(self, interaction: Interaction):
         try:
-            with open("data/uid.json", "r", encoding="utf8") as uid_file:
-                user_uid = json.load(uid_file)
+            INTRO_DATA: json = ConfigData.load_data("data/intro.json")
 
-            user_id_str = str(interaction.user.id)
-            if user_id_str in user_uid:
-                content = user_uid[user_id_str]["content"]
-                my_uid = re.search(r"\b\d{9}\b", content)
-                my_name = re.search(r"[^名字:：\s]\w{1,}", content)
+            user_data = INTRO_DATA[str(interaction.user.id)]
+            name = user_data.get("name")
+            uid = user_data.get("genshin_uid")
 
-                if my_uid and my_name:
-                    await interaction.response.send_modal(
-                        QuestModal(my_uid.group(), my_name.group())
-                    )
-                else:
-                    raise ValueError("Invalid UID or name format in user introduction.")
-            else:
-                await interaction.response.send_modal(QuestModal())
+            await interaction.response.send_modal(QuestModal(name, uid))
 
-        except Exception as error:
-            await interaction.response.send_message(
-                f"發生錯誤：```{str(error)}```請將此錯誤私訊給<@407881227270356994>協助處理",
-                ephemeral=True,
+        except Exception as unexpected_error:
+            await ErrorHandler.handle_error(
+                self,
+                interaction,
+                command="quest",
+                error_content=unexpected_error,
+                error_type="unexpected_error",
             )
 
 
