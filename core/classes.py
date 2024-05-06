@@ -16,7 +16,7 @@ class ConfigData:
 
     def save_data(_path: str, _data: str) -> None:
         with open(_path, "w", encoding="utf-8") as file:
-            json.dump(_data, file, indent=4)
+            json.dump(_data, file, indent=4, ensure_ascii=False)
 
 
 class PermissionChecker:
