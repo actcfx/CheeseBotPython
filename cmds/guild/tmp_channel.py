@@ -1,6 +1,5 @@
-import nextcord
 import json
-from ast import Pass
+import nextcord
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 
@@ -11,7 +10,7 @@ class tmp_channel(Cog_Extension):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_voice_state_update(self, member, before, after):
+    async def on_voice_state_update(self, user, before_channel, after_channel):
         with open('data/list.json', 'r', encoding = 'utf-8') as list:
             list1 = json.load(list)
         tmp_channels_list = list1['tmp_channels']
