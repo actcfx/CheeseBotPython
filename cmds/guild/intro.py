@@ -16,7 +16,6 @@ class Introduction(Cog_Extension):
         interaction: Interaction,
         user: User = SlashOption(name="要查詢的人", required=False),
     ):
-
         await interaction.response.defer(ephemeral=True)
 
         try:
