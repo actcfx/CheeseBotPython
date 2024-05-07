@@ -129,7 +129,7 @@ class BackBan(Cog_Extension):
         _page: int,
         _number: int,
         _total_pages: int,
-    ):
+    ) -> Embed:
         ban_list_embed = Embed(title="ban人清單", color=0xFFE380)
         ban_list_embed.set_footer(
             text=f"第 {_page + 1}/{_total_pages} 頁，共 {len(_ban_list)} 人"
