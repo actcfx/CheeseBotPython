@@ -27,13 +27,13 @@ class BackBan(Cog_Extension):
             if user:
                 user_id = user.id
 
-            BAN_LIST: list[int] = ConfigData.load_data("data/ban_list.json")
+            black_list: list[int] = ConfigData.load_data("data/black_list.json")
 
-            if user_id in BAN_LIST:
+            if user_id in black_list:
                 return
             else:
-                BAN_LIST.append(user_id)
-                ConfigData.save_data("data/ban_list.json", BAN_LIST)
+                black_list.append(user_id)
+                ConfigData.save_data("data/black_list.json", black_list)
                 await interaction.followup.send(f"已將 {user_id} 加入 ban list")
 
         except Exception as unexpected_error:
@@ -62,11 +62,11 @@ class BackBan(Cog_Extension):
             if user:
                 user_id = user.id
 
-            ban_list: list[int] = ConfigData.load_data("data/ban_list.json")
+            black_list: list[int] = ConfigData.load_data("data/black_list.json")
 
-            if user_id in ban_list:
-                ban_list.remove(user_id)
-                ConfigData.save_data("data/ban_list.json", ban_list)
+            if user_id in black_list:
+                black_list.remove(user_id)
+                ConfigData.save_data("data/black_list.json", black_list)
                 await interaction.followup.send(f"已將 {user_id} 從 ban list 移除")
             else:
                 await interaction.followup.send(f"{user_id} 不在 ban list 裡")
@@ -101,17 +101,17 @@ class BackBan(Cog_Extension):
                 self, interaction, check_command="ban_list"
             ): return
 
-            ban_list: list[int] = ConfigData.load_data("data/ban_list.json")
-            total_pages: int = math.ceil(len(ban_list) / limit)
-            ban_list_embeds: list[Embed] = []
+            BLACK_LIST: list[int] = ConfigData.load_data("data/black_list.json")
+            total_pages: int = math.ceil(len(BLACK_LIST) / limit)
+            black_list_embeds: list[Embed] = []
 
             for page in range(total_pages + 1):
-                ban_list_embeds.append(
-                    self.set_ban_list_embed(ban_list, page, limit, total_pages)
+                black_list_embeds.append(
+                    self.set_black_list_embed(BLACK_LIST, page, limit, total_pages)
                 )
 
-            view = Pagination_View(total_pages, ban_list_embeds)
-            await interaction.followup.send(embed=ban_list_embeds[0], view=view)
+            view = Pagination_View(total_pages, black_list_embeds)
+            await interaction.followup.send(embed=black_list_embeds[0], view=view)
 
         except Exception as unexpected_error:
             await ErrorHandler.handle_error(
@@ -122,23 +122,23 @@ class BackBan(Cog_Extension):
                 error_type="unexpected_error",
             )
 
-    # 產生 ban_list 的 embed
-    def set_ban_list_embed(
+    # 產生 black_list 的 embed
+    def set_black_list_embed(
         self,
-        _ban_list: list[int],
+        _black_list: list[int],
         _page: int,
         _number: int,
         _total_pages: int,
     ) -> Embed:
-        ban_list_embed = Embed(title="ban人清單", color=0xFFE380)
-        ban_list_embed.set_footer(
-            text=f"第 {_page + 1}/{_total_pages} 頁，共 {len(_ban_list)} 人"
+        black_list_embed = Embed(title="ban人清單", color=0xFFE380)
+        black_list_embed.set_footer(
+            text=f"第 {_page + 1}/{_total_pages} 頁，共 {len(_black_list)} 人"
         )
-        for banned in _ban_list[(_page * _number) : ((_page + 1) * _number)]:
-            ban_list_embed.add_field(
+        for banned in _black_list[(_page * _number) : ((_page + 1) * _number)]:
+            black_list_embed.add_field(
                 name=self.bot.get_user(banned), value=banned, inline=False
             )
-        return ban_list_embed
+        return black_list_embed
 
 
 def setup(bot):
