@@ -13,21 +13,23 @@ class BackBan(Cog_Extension):
     async def join_ban(
         self,
         interaction: Interaction,
-        user: User = SlashOption(
-            name="要ban的人或id", required=True
-        ),
+        user: User = SlashOption(name="要ban的人或id", required=True),
     ):
         await interaction.response.defer(ephemeral=True)
 
         try:
+            user_id: int
+            black_list: list[int]
+
             if not await PermissionChecker.have_roles(
                 self, interaction, check_command="ban 人清單"
-            ): return
+            ):
+                return
 
             if user:
                 user_id = user.id
 
-            black_list: list[int] = ConfigData.load_data("data/black_list.json")
+            black_list = ConfigData.load_data("data/black_list.json")
 
             if user_id in black_list:
                 return
@@ -54,6 +56,9 @@ class BackBan(Cog_Extension):
         await interaction.response.defer(ephemeral=True)
 
         try:
+            user_id: int
+            black_list: list[int]
+
             if not await PermissionChecker.have_roles(
                 self, interaction, check_command="ban 人清單"
             ):
@@ -62,7 +67,7 @@ class BackBan(Cog_Extension):
             if user:
                 user_id = user.id
 
-            black_list: list[int] = ConfigData.load_data("data/black_list.json")
+            black_list = ConfigData.load_data("data/black_list.json")
 
             if user_id in black_list:
                 black_list.remove(user_id)
@@ -97,13 +102,15 @@ class BackBan(Cog_Extension):
         await interaction.response.defer(ephemeral=True)
 
         try:
+            BLACK_LIST: list[int] = ConfigData.load_data("data/black_list.json")
+
+            black_list_embeds: list[Embed] = []
+            total_pages: int = math.ceil(len(BLACK_LIST) / limit)
+
             if not await PermissionChecker.have_roles(
                 self, interaction, check_command="ban_list"
-            ): return
-
-            BLACK_LIST: list[int] = ConfigData.load_data("data/black_list.json")
-            total_pages: int = math.ceil(len(BLACK_LIST) / limit)
-            black_list_embeds: list[Embed] = []
+            ):
+                return
 
             for page in range(total_pages + 1):
                 black_list_embeds.append(
@@ -130,7 +137,7 @@ class BackBan(Cog_Extension):
         _number: int,
         _total_pages: int,
     ) -> Embed:
-        black_list_embed = Embed(title="ban人清單", color=0xFFE380)
+        black_list_embed: Embed = Embed(title="ban人清單", color=0xFFE380)
         black_list_embed.set_footer(
             text=f"第 {_page + 1}/{_total_pages} 頁，共 {len(_black_list)} 人"
         )
