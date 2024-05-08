@@ -52,7 +52,7 @@ class Introduction(Cog_Extension):
 
     @commands.Cog.listener()
     async def on_message(self, message: Message):
-        PATTERN = r"【原神】\n名字：(.*?)\nUID：(.*?)\n伺服器：.*?^【星穹鐵道】"
+        PATTERN = fr"{ConfigData.load_data('config/assets.json').get('intro_pattern')}"
         INTRODUCTION_CHANNEL_ID: int = ConfigData.load_data("config/channels.json").get(
             "introduction_channel"
         )
