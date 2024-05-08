@@ -11,13 +11,14 @@ class Pagination_View(View):
         self.total_pages: int = _total_pages
         self.embeds: list[Embed] = _embeds
 
-        self.previous_button = Button(label="<", style=nextcord.ButtonStyle.grey)
-        self.next_button = Button(label=">", style=nextcord.ButtonStyle.grey)
+        self.previous_button: Button = Button(label="<", style=nextcord.ButtonStyle.grey)
+        self.next_button: Button = Button(label=">", style=nextcord.ButtonStyle.grey)
 
         self.previous_button.callback = self.previous_button_callback
         self.next_button.callback = self.next_button_callback
 
-        self.add_item(self.next_button)
+        if self.total_pages > 1:
+            self.add_item(self.next_button)
 
     def update_buttons(self) -> None:
         self.clear_items()
