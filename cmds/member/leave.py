@@ -23,7 +23,7 @@ class Leave(Cog_Extension):
         try:
             await member.send(LEAVE_DM_CONTENT)
         except Exception:
-            print(f"Cannot send dm to {member}")
+            print(f"❌ | Cannot send dm to {member}")
 
 
 def setup(bot):
