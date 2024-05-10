@@ -3,7 +3,7 @@ from nextcord import Guild, Role, channel, PermissionOverwrite, CategoryChannel
 from core.classes import Cog_Extension, ConfigData
 
 
-class tmp_channel(Cog_Extension):
+class TemporaryChannel(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
 
@@ -82,4 +82,4 @@ class tmp_channel(Cog_Extension):
 
 
 def setup(bot):
-    bot.add_cog(tmp_channel(bot))
+    bot.add_cog(TemporaryChannel(bot))

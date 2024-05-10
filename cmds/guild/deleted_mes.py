@@ -1,11 +1,10 @@
 import json
-import nextcord
 from nextcord.ext import commands
 from nextcord import TextChannel, Embed, Message
 from core.classes import Cog_Extension, ConfigData
 
 
-class Deleted_mes(Cog_Extension):
+class DeletedMessage(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
 
@@ -13,7 +12,7 @@ class Deleted_mes(Cog_Extension):
     async def on_message_delete(self, message):
         BOT_INFO: json = ConfigData.load_data("config/bot_info.json")
         GUILD_ID: int = BOT_INFO.get("guild_id")
-        
+
         DEL_MES_CHANNEL_ID: int = ConfigData.load_data("config/channels.json").get("del_mes_channel")
         DEL_MES_CHANNEL: TextChannel = self.bot.get_channel(DEL_MES_CHANNEL_ID)
         DEL_ATTACHMENT_CHANNEL_ID: int = ConfigData.load_data("config/channels.json").get("del_attachment_channel")
@@ -42,4 +41,4 @@ class Deleted_mes(Cog_Extension):
 
 
 def setup(bot):
-    bot.add_cog(Deleted_mes(bot))
+    bot.add_cog(DeletedMessage(bot))

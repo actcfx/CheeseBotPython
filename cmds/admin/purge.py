@@ -4,7 +4,7 @@ from nextcord import Interaction, SlashOption
 from core.classes import Cog_Extension, ErrorHandler
 
 
-class mod(Cog_Extension):
+class Purge(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
 
@@ -32,4 +32,4 @@ class mod(Cog_Extension):
 
 
 def setup(bot):
-    bot.add_cog(mod(bot))
+    bot.add_cog(Purge(bot))
