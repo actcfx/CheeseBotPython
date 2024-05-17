@@ -16,7 +16,7 @@ class ConfigData:
 
     def save_data(_path: str, _data: str) -> None:
         with open(_path, "w", encoding="utf-8") as file:
-            json.dump(_data, file, indent=4)
+            json.dump(_data, file, indent=4, ensure_ascii=False)
 
 
 class PermissionChecker:
@@ -58,7 +58,7 @@ class ErrorHandler:
 
         # 取得機器人資訊
         BOT_INFO: json = ConfigData.load_data("config/bot_info.json")
-        DEVELOPER: Member = interaction.guild.get_member(BOT_INFO.get("developer"))
+        DEVELOPER: Member = interaction.guild.get_member(BOT_INFO.get("developer_id"))
         VERSION: str = BOT_INFO.get("version")
 
         # 取得錯誤訊息內容
