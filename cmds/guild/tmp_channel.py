@@ -9,19 +9,13 @@ class TemporaryChannel(Cog_Extension):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, user, before_channel, after_channel):
-        GUILD: Guild = self.bot.get_guild(
-            ConfigData.load_data("config/bot_info.json").get("guild_id")
-        )
-        INITIALIZE_ROLES_DICT: dict = ConfigData.load_data("config/roles.json").get(
-            "initialize_roles"
-        )
-        MEMBER_ROLE: Role = GUILD.get_role(INITIALIZE_ROLES_DICT.get("member"))
-        EVERYONE_ROLE: Role = GUILD.get_role(
-            ConfigData.load_data("config/roles.json").get("everyone_role")
-        )
-        TMP_CREATE_CHANNEL: channel = GUILD.get_channel(
-            ConfigData.load_data("config/channels.json").get("tmp_create_channel")
-        )
+        GUILD: Guild = self.bot.get_guild(ConfigData.load_data("config/bot_info.json").get("guild_id"))
+
+        DEFAULT_ROLES_DICT: dict = ConfigData.load_data("config/roles.json").get("default_roles")
+        MEMBER_ROLE: Role = GUILD.get_role(DEFAULT_ROLES_DICT.get("member"))
+        EVERYONE_ROLE: Role = GUILD.get_role(ConfigData.load_data("config/roles.json").get("everyone_role"))
+
+        TMP_CREATE_CHANNEL: channel = GUILD.get_channel(ConfigData.load_data("config/channels.json").get("tmp_create_channel"))
         TMP_CHANNEL_CATEGORY: CategoryChannel = TMP_CREATE_CHANNEL.category
 
         OVERWRITES = {
