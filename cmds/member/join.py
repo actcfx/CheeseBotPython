@@ -13,7 +13,7 @@ class Join(Cog_Extension):
 
         CHAT_CHANNEL: TextChannel = self.bot.get_channel(ConfigData.load_data("config/channels.json").get("chat_channel"))
         WELCOME_CHANNEL: TextChannel = self.bot.get_channel(ConfigData.load_data("config/channels.json").get("welcome_channel"))
-        DEFAULT_ROLES_ID: list[int] = ConfigData.load_data("config/roles.json").get("default_roles")
+        DEFAULT_ROLES_ID: list[int] = list(ConfigData.load_data("config/roles.json").get("default_roles").values())
 
         WELCOME_MES_IN_CHAT_CHANNEL: str = ConfigData.load_data("config/assets.json").get("welcome_mes_in_chat_channel")
         WELCOME_EMBED_CONTENT: dict = ConfigData.load_data("config/assets.json").get("welcome_embed_content")
