@@ -52,6 +52,9 @@ async def reload(ctx, extension):
 
 # 載入 cog files
 for foldername in os.listdir("cmds"):
+    if foldername == ".DS_Store":
+        continue
+
     for filename in os.listdir(f"cmds/{foldername}"):
         if filename.endswith(".py"):
             try:
