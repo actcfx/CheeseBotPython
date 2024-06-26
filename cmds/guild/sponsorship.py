@@ -15,7 +15,7 @@ class Sponsorship(Cog_Extension):
             )
             await interaction.response.send_message(f"你的專屬工商合作與贊助討論串已開啟\n{sponsorship_theard.mention}")
             await sponsorship_theard.send(
-                f"> <@&978958227016409088><@&978956326359138314><@978680963099942912> 有新的建議與反饋唷！"
+                f"<@&978958227016409088><@&978956326359138314><@&978680963099942912> 有新的建議與反饋唷！"
             )
 
         except Exception as unexpected_error:
