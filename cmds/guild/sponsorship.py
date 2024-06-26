@@ -3,7 +3,7 @@ from nextcord import Interaction
 from core.classes import Cog_Extension, ErrorHandler
 
 
-class Suggest(Cog_Extension):
+class Sponsorship(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
 
@@ -29,4 +29,4 @@ class Suggest(Cog_Extension):
 
 
 def setup(bot):
-    bot.add_cog(Suggest(bot))
+    bot.add_cog(Sponsorship(bot))
