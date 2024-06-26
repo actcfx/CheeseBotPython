@@ -35,9 +35,12 @@ class DeletedMessage(Cog_Extension):
 
         if len(message.attachments) > 0:
             for attachment in message.attachments:
-                await DEL_ATTACHMENT_CHANNEL.send(
-                    f"link: {del_mes_url}\nattchment: ", file=await attachment.to_file()
-                )
+                try:
+                    await DEL_ATTACHMENT_CHANNEL.send(
+                        f"link: {del_mes_url}\nattchment: ", file=await attachment.to_file()
+                    )
+                except:
+                    print(f"❌ | Cannot send attachment from {del_mes_url}")
 
 
 def setup(bot):
