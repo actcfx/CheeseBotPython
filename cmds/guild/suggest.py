@@ -13,7 +13,7 @@ class Suggest(Cog_Extension):
             suggest_theard = await interaction.channel.create_thread(
                 name=f"{interaction.user.name} 的專屬建議與反饋串", type=nextcord.ChannelType.private_thread
             )
-            await interaction.response.send_message(f"你的專屬建議與反饋討論串已開啟\n{suggest_theard.mention}")
+            await interaction.response.send_message(f"你的專屬建議與反饋討論串已開啟（5 分鐘後自動刪除）！\n{suggest_theard.mention}", delete_after=300)
             await suggest_theard.send(
                 f"> {interaction.user.mention} 這裡是你專屬的建議與反饋區\n```你在這裡輸入的所有內容都只能被糾察、管理、工程、社長以及被@到的人看到``` 你可以提出你的建議與反饋，而不會被其他人看見\n 如果要讓其他人看到此討論串，可以@該成員\n\n<@&978958227016409088><@&978956326359138314> 有新的建議與反饋唷！"
             )

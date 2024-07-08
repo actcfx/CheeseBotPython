@@ -13,7 +13,7 @@ class Sponsorship(Cog_Extension):
             sponsorship_theard = await interaction.channel.create_thread(
                 name=f"{interaction.user.name} 的專屬工商合作與贊助串", type=nextcord.ChannelType.private_thread
             )
-            await interaction.response.send_message(f"你的專屬工商合作與贊助討論串已開啟\n{sponsorship_theard.mention}")
+            await interaction.response.send_message(f"你的專屬工商合作與贊助討論串已開啟（5 分鐘後自動刪除）！\n{sponsorship_theard.mention}", delete_after=300)
             await sponsorship_theard.send(
                 f"<@&978958227016409088><@&978956326359138314><@&978680963099942912> 有新的建議與反饋唷！"
             )
