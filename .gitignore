@@ -6,6 +6,10 @@
 /__pycache__
 /cmds/__pycache__
 /core/__pycache__
+/admin/__pycache__
+/guild/__pycache__
+/member/__pycache__
+/send_embed/__pycache__
 
 /.DS_Store
 /cmds/.DS_Store
