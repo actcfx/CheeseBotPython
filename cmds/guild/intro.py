@@ -53,10 +53,12 @@ class Introduction(Cog_Extension):
     @commands.Cog.listener()
     async def on_message(self, message: Message):
         PATTERN = fr"{ConfigData.load_data('config/assets.json').get('intro_pattern')}"
-        INTRODUCTION_CHANNEL_ID: int = ConfigData.load_data("config/channels.json").get(
-            "introduction_channel"
-        )
+        INTRODUCTION_CHANNEL_ID: int = ConfigData.load_data("config/channels.json").get("introduction_channel")
+
         intro_data: json = ConfigData.load_data("data/intro.json")
+
+        user_name: str = None
+        user_uid: int = None
 
         if message.channel.id != INTRODUCTION_CHANNEL_ID:
             return
@@ -65,8 +67,7 @@ class Introduction(Cog_Extension):
         if search:
             user_name: str = search.group(1)
             user_uid: int = int(search.group(2).strip())
-        else:
-            user_uid: int = None
+
 
         intro_data[str(message.author.id)] = {
             "name": user_name,

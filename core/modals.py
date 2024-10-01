@@ -62,12 +62,13 @@ class QuestModal(nextcord.ui.Modal):
                 ephemeral=True,
             )
 
-        if self.name == None:
-            intro_data[str(interaction.user.id)]["name"] = int(self.name_input.value)
-            ConfigData.save_data("data/intro.json", intro_data)
-
-        if self.uid == None:
-            intro_data[str(interaction.user.id)]["genshin_uid"] = int(self.uid_input.value)
+        if self.name == None or self.uid == None:
+            intro_data[str(interaction.user.id)] = {
+                "name": self.name_input.value,
+                "content": None,
+                "id": None,
+                "genshin_uid": int(self.uid_input.value),
+            }
             ConfigData.save_data("data/intro.json", intro_data)
 
         # Create Embed

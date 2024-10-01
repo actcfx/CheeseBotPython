@@ -6,7 +6,7 @@ from nextcord.ext import commands
 
 bot = commands.Bot(command_prefix="%", intents=nextcord.Intents.all())
 
-TOKEN = "test_token"    # TODO: 修改使用的 token
+TOKEN = "token"
 TOKEN: str = ConfigData.load_data("config/token.json").get(TOKEN)
 
 ADMIN_DATA: json = ConfigData.load_data("config/roles.json")
@@ -52,6 +52,9 @@ async def reload(ctx, extension):
 
 # 載入 cog files
 for foldername in os.listdir("cmds"):
+    if foldername == ".DS_Store":
+        continue
+
     for filename in os.listdir(f"cmds/{foldername}"):
         if filename.endswith(".py"):
             try:
