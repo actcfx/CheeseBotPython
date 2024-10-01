@@ -6,7 +6,7 @@ from nextcord.ext import commands
 
 bot = commands.Bot(command_prefix="%", intents=nextcord.Intents.all())
 
-TOKEN = "test_token"    # TODO: 修改使用的 token
+TOKEN = "token"
 TOKEN: str = ConfigData.load_data("config/token.json").get(TOKEN)
 
 ADMIN_DATA: json = ConfigData.load_data("config/roles.json")
